@@ -70,11 +70,7 @@ def new_user():
     #storing the new reviews data
      #creating a hashed password for the database
     hashed_password = generate_password_hash(password)
-<<<<<<< HEAD
     new_user = User(first_name=first_name, last_name=last_name, password=hashed_password, email=email, contact=contact,locations_id=locations_id)
-=======
-    new_user = User(name=name, password=hashed_password, email=email, contact=contact)
->>>>>>> d37283c3019152dcc2b047a9ab5760e14a9f1928
 
     #add the new review
     db.session.add(new_user)

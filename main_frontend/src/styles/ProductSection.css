@@ -4,6 +4,55 @@
   flex-direction: column;
 }
 
+.pdt-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.418);
+  padding: .75rem;
+}
+
+.pdt-card h3 {
+  color: white;
+  font-weight: bold;
+}
+
+.pdt-card > div {
+  display: flex;
+}
+
+.pdt-card .description {
+  text-align: center;
+}
+
+.pdt-card .product-buttons {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+  width: 70%;
+}
+
+#pdt-card {
+  height: auto;
+  justify-content: stretch;
+  min-width: 15rem;
+}
+
+#delete-button {
+  background-color: rgba(255, 0, 0, 0.603);
+  color: black;
+}
+
+#update-button {
+  color: black;
+}
+
+.pdt-card .bold {
+  font-weight: bold;
+  margin-right: .4rem;
+}
+
 @media (max-width: 768px) {
   .product-section {
     width: 100%;

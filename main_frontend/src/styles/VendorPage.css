@@ -1,0 +1,19 @@
+.vendor-form-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vendor-dash-main {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+}
+
+.vendor-dash-main button {
+    margin: 4rem auto;
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: 10px;
+}

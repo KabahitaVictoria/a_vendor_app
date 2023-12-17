@@ -1,19 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import LoginForm from "../LoginForm";
-import { SellerSignUpForm } from "./SellerSignUpForm";
 
 function SellerSignInForm(props) {
   const [contact, setContact] = useState("");
   const [password, setPassword] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [data, setData] = useState("");
-
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showSellerSignUpForm, setShowSellerSignUpForm] = useState(false);
+  const [contactError, setContactError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const navigate = useNavigate();
   const { id } = useParams();
+
+  useEffect(() => {
+    if (hasSubmitted) {
+      let isValid = true;
+
+      if (!contact) {
+        setContactError("Contact number is required");
+        isValid = false;
+      } else {
+        setContactError("");
+      }
+
+      if (!password) {
+        setPasswordError("Password is required");
+        isValid = false;
+      } else {
+        setPasswordError("");
+      }
+
+      if (isValid) {
+        handleLoginUser;
+      }
+    }
+  }, [hasSubmitted]);
 
   function handleLoginUser(e) {
     e.preventDefault();
@@ -46,9 +67,13 @@ function SellerSignInForm(props) {
             );
             localStorage.setItem("user_type", JSON.stringify(data.user_type));
             navigate(`/dashboard/vendor/${data.for.id}`);
+            window.location.reload();
           }
-        } else if (data.error) {
-          setData(data.error);
+        } else if (data.contact_error) {
+          setContactError(data.contact_error);
+        } else if (data.password_error) {
+          console.log("data.password_error:", data.password_error);
+          setPasswordError(data.password_error);
         }
       })
       .catch((err) => console.log(err));
@@ -56,23 +81,8 @@ function SellerSignInForm(props) {
     // Set state to indicate form submission
     setHasSubmitted(!hasSubmitted);
 
-    navigate(`/dashboard/vendor/${id}`);
+    // navigate(`/dashboard/vendor/${id}`);
   }
-
-  const closeForm4 = () => {
-    // Call the closeForm function passed from props
-    if (props.closeForm) {
-      props.closeForm();
-    }
-  };
-
-  const toggleLoginForm = () => {
-    setShowLoginForm(!showLoginForm);
-  };
-
-  const toggleSellerSignUpForm = () => {
-    setShowSellerSignUpForm(!showSellerSignUpForm);
-  };
 
   return (
     <>
@@ -80,8 +90,8 @@ function SellerSignInForm(props) {
         <span>Seller Login</span>
       </h1>
 
-      <a href="#customersignin" className="signin" onClick={toggleLoginForm}>
-        Sign In As A Customer
+      <a href="/login_or_register/login" className="signin">
+        Login As A Customer
       </a>
 
       <input
@@ -90,8 +100,12 @@ function SellerSignInForm(props) {
         name="contact"
         required
         value={contact}
-        onChange={(e) => setContact(e.target.value)}
+        onChange={(e) => {
+          setContact(e.target.value);
+          setContactError("");
+        }}
       ></input>
+      <p className="error">{contactError}</p>
 
       <input
         type="password"
@@ -99,40 +113,22 @@ function SellerSignInForm(props) {
         name="psw"
         required
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => {
+          setPassword(e.target.value);
+          setPasswordError("");
+        }}
       ></input>
+      <p className="error">{passwordError}</p>
 
       {/* Creating a button to submit the login form and a button to close the form */}
       <button type="submit" className="btn" onClick={handleLoginUser}>
         Login
       </button>
-      <button type="button" className="btn-cancel" onClick={closeForm4}>
-        Close
-      </button>
 
       <p>
         Have no account yet?{" "}
-        <a href="#" onClick={toggleSellerSignUpForm}>
-          Register now as Seller
-        </a>
-        .
+        <a href="/login_or_register/sellerSignup">Register now as a Seller</a>.
       </p>
-
-      {showLoginForm && (
-        <div className="form-popup">
-          <div className="form-container">
-            <LoginForm closeForm={toggleLoginForm} />
-          </div>
-        </div>
-      )}
-
-      {showSellerSignUpForm && (
-        <div className="form-popup">
-          <div className="form-container">
-            <SellerSignUpForm closeForm={toggleSellerSignUpForm} />
-          </div>
-        </div>
-      )}
     </>
   );
 }

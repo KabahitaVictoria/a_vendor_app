@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const SellerSignUpForm = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -9,17 +10,13 @@ export const SellerSignUpForm = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [data, setData] = useState("");
+  const [error, setError] = useState("");
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
   };
 
-  const closeForm3 = () => {
-    // Call the closeForm function passed from props
-    if (props.closeForm) {
-      props.closeForm();
-    }
-  };
+  const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -49,8 +46,9 @@ export const SellerSignUpForm = (props) => {
         // Check if there is a message or error in the response data
         if (data.message) {
           setData(data.message);
+          navigate("/login_or_register/sellerSignin");
         } else if (data.error) {
-          setData(data.error);
+          setError(data.error);
         }
       })
       .catch((err) => console.log(err));
@@ -63,8 +61,12 @@ export const SellerSignUpForm = (props) => {
       <h1>
         <span>Seller Sign Up</span>
       </h1>
+      <p className="error">{error}</p>
+      <a href="/login_or_register/signup" className="signin">
+        Sign Up As A Customer
+      </a>
       {/* Display message if form has been submitted */}
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className="form2">
         <input
           type="text"
           placeholder="Enter Your First Name"
@@ -72,6 +74,7 @@ export const SellerSignUpForm = (props) => {
           required
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          className="form2-input"
         ></input>
 
         <input
@@ -125,13 +128,9 @@ export const SellerSignUpForm = (props) => {
         </button>
       </form>
 
-      {/* Close sign up form */}
-      <button type="button" className="btn-cancel" onClick={closeForm3}>
-        Close
-      </button>
-
       <p>
-        Already registered? <a href="#">Log In as Seller</a>.
+        Already registered?{" "}
+        <a href="/login_or_register/sellerSignin">Log In as Seller</a>.
       </p>
     </>
   );

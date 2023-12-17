@@ -24,10 +24,10 @@ const SecNav = () => {
       </button>
       {/* <button className="sell-button">SELL</button> */}
 
-      <div className="cart-info" title="cart" onClick={onCartClick}>
+      {/* <div className="cart-info" title="cart" onClick={onCartClick}>
         <img src="/icons/cart.png" alt="" />
         <p>0</p>
-      </div>
+      </div> */}
 
       {/* Conditionally render the Sidebar component based on sidebarOpen state */}
       {sidebarOpen && <Sidebar toggleSidebar={toggleSidebar} />}

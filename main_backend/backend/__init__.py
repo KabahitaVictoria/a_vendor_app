@@ -10,7 +10,7 @@ def create_app(config_name): #Application Factory Function
     config[config_name].init_app(app)
     app.config.from_pyfile("../config.py")
 
-    CORS(app=app, resources={r"/*": {"origins": "*"}})
+    CORS(app=app, resources={r"/*": {"origins": "http://localhost:5173"}})
 
     db.init_app(app)
     ma.init_app(app)

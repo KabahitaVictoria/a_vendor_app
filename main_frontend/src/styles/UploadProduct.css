@@ -1,3 +1,15 @@
+.upload-product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    margin: 0 auto 3rem auto;
+}
+
+.category-form input {
+    padding: .5rem;
+}
+
 .upload-product h1 {
     text-align: center;
 }

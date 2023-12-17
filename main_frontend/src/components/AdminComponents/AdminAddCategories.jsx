@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 const AdminAddCategoriesForm = () => {
   const [categoryName, setCategoryName] = useState("");
@@ -20,7 +20,7 @@ const AdminAddCategoriesForm = () => {
       icon: categoryIcon,
     };
 
-    fetch("http://localhost:5000/business-categories/create", {
+    fetch("http://localhost:5000/business_categories/create", {
       method: "POST",
       body: JSON.stringify(newCategory),
       headers: {

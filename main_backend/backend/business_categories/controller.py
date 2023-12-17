@@ -1,12 +1,14 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt_extended import jwt_required
 from backend.db import db
 from backend.business_categories.model import BusinessCategory, BusinessCategorySchema
+from backend.businesses.model import Business, BusinessSchema
 
-business_category_bp = Blueprint("business_category", __name__)
+business_category_bp = Blueprint('business_categories', __name__,url_prefix='/business_categories')
 business_category_schema = BusinessCategorySchema()
 
 # Create a new business category
-@business_category_bp.route("/business-categories/create", methods=["POST"])
+@business_category_bp.route("/business_categories/create", methods=["POST"])
 def create_business_category():
         data = request.get_json()
 
@@ -26,14 +28,25 @@ def create_business_category():
         return business_category_schema.jsonify(new_category), 201
 
 # Get all business categories
-@business_category_bp.route("/business-categories", methods=["GET"])
+@business_category_bp.route("/", methods=["GET"])
+# @jwt_required()
 def get_all_business_categories():
-    categories = BusinessCategory.query.all()
-    result = business_category_schema.dump(categories, many=True)
-    return jsonify(result)
+    business_categories = BusinessCategory.query.all()
+
+    business_categories_with_businesses = []
+    for business_category in business_categories:
+        business_category_data = BusinessCategorySchema().dump(business_category)
+        businesses = Business.query.filter_by(business_category_id=business_category.id).all()
+
+        business_schema = BusinessSchema(many=True)
+        business_category_data['products'] = business_schema.dump(businesses)
+        
+        business_categories_with_businesses.append(business_category_data)
+
+    return jsonify({"count": len(business_categories), "data": business_categories_with_businesses})
 
 # Get a single business category by ID
-@business_category_bp.route("/business-categories/<int:category_id>", methods=["GET"])
+@business_category_bp.route("/business_categories/<int:category_id>", methods=["GET"])
 def get_business_category(category_id):
     category = BusinessCategory.query.get(category_id)
     if category:
@@ -42,7 +55,7 @@ def get_business_category(category_id):
     return jsonify({"error": "Business category not found"}), 404
 
 # Update a business category by ID
-@business_category_bp.route("/business-categories/<int:category_id>", methods=["PUT"])
+@business_category_bp.route("/business_categories/<int:category_id>", methods=["PUT"])
 def update_business_category(category_id):
     try:
         category = BusinessCategory.query.get(category_id)
@@ -63,7 +76,7 @@ def update_business_category(category_id):
         return jsonify({"error": str(e)}), 400
 
 # Delete a business category by ID
-@business_category_bp.route("/business-categories/<int:category_id>", methods=["DELETE"])
+@business_category_bp.route("/business_categories/<int:category_id>", methods=["DELETE"])
 def delete_business_category(category_id):
     category = BusinessCategory.query.get(category_id)
     if category:

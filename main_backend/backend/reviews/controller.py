@@ -19,13 +19,8 @@ def reviews():
                 "id":review.id,
                 "review":review.review,
                 "created_at": review.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-<<<<<<< HEAD
-                "user_id":review.user_id,
-                "orders_id":results.orders_id
-=======
                 "users_id":review.users_id,
                 "orders_id":review.orders_id
->>>>>>> d37283c3019152dcc2b047a9ab5760e14a9f1928
             }for review in reviews]
         
      return {"count":len(reviews), "reviews":results} 

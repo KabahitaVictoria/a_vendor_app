@@ -1,8 +1,9 @@
 import { useState } from "react";
 import LoginForm from "../LoginForm";
 import { SellerSignUpForm } from "./SellerSignUpForm";
+import { useNavigate } from "react-router-dom";
 
-export const SignUpForm = (props) => {
+export const SignUpForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,17 +12,13 @@ export const SignUpForm = (props) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [data, setData] = useState("");
-
-  const [showLoginForm, setShowLoginForm] = useState(false);
-  const [showSellerSignUpForm, setShowSellerSignUpForm] = useState(false);
+  const [error, setError] = useState("");
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
   };
 
-  function closeForm2() {
-    props.closeForm();
-  }
+  const navigate = useNavigate();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -32,10 +29,6 @@ export const SignUpForm = (props) => {
       email: email,
       contact: contact,
       password: password,
-<<<<<<< HEAD
-=======
-      // locations_id: location_id
->>>>>>> d37283c3019152dcc2b047a9ab5760e14a9f1928
     };
 
     if (password !== confirmPassword) {
@@ -55,8 +48,9 @@ export const SignUpForm = (props) => {
         // Check if there is a message or error in the response data
         if (data.message) {
           setData(data.message);
+          navigate("/login_or_register/login");
         } else if (data.error) {
-          setData(data.error);
+          setError(data.error);
         }
       })
       .catch((err) => console.log(err));
@@ -64,28 +58,17 @@ export const SignUpForm = (props) => {
     setHasSubmitted(!hasSubmitted);
   };
 
-  const toggleLoginForm = () => {
-    setShowLoginForm(!showLoginForm);
-  };
-
-  const toggleSellerSignUpForm = () => {
-    setShowSellerSignUpForm(!showSellerSignUpForm);
-  };
-
   return (
     <>
       <h1>
         <span>Customer Sign Up</span>
       </h1>
-      <a
-        href="#sellersignin"
-        className="signin"
-        onClick={toggleSellerSignUpForm}
-      >
+      <a href="/login_or_register/sellerSignup" className="signin">
         Sign Up As A Seller
       </a>
+      <p className="error">{error}</p>
       {/* Display message if form has been submitted */}
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className="form2">
         <input
           type="text"
           placeholder="Enter Your First Name"
@@ -140,47 +123,14 @@ export const SignUpForm = (props) => {
           onChange={handleConfirmPasswordChange}
         ></input>
 
-<<<<<<< HEAD
-=======
-        
-  
-        
-
->>>>>>> d37283c3019152dcc2b047a9ab5760e14a9f1928
         {/* Submit form details */}
         <button type="submit" className="btn">
           Sign Up
         </button>
       </form>
 
-      {/* Close sign up form */}
-      <button type="button" className="btn-cancel" onClick={closeForm2}>
-        Close
-      </button>
-
-      {/* Display login form popup when showLoginForm is true */}
-      {showLoginForm && (
-        <div className="form-popup">
-          <div className="form-container">
-            <LoginForm closeForm={toggleLoginForm} />
-          </div>
-        </div>
-      )}
-
-      {showSellerSignUpForm && (
-        <div className="form-popup">
-          <div className="form-container">
-            <SellerSignUpForm closeForm={toggleSellerSignUpForm} />
-          </div>
-        </div>
-      )}
-
       <p>
-        Already registered?{" "}
-        <a href="#" onClick={toggleLoginForm}>
-          Log In
-        </a>
-        .
+        Already registered? <a href="/login_or_register/login">Log In</a>.
       </p>
     </>
   );

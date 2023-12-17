@@ -1,8 +1,9 @@
-const SinglePdtMain = () => {
+
+const SinglePdtMain = (props) => {
     return (
       <div className="single-product-main">
         <div className="product-main-section">
-          <div className="see-product-section">
+          {/* <div className="see-product-section">
             <video
               id="my-video"
               className="video-js"
@@ -25,20 +26,20 @@ const SinglePdtMain = () => {
                 </a>
               </p>
             </video>
-          </div>
+          </div> */}
           <div className="product-user-order">
             <div className="product-name-and-price">
               <div className="">
-                <h1>Brazilian Braids</h1>
-                <h2>UGX.5000 @</h2>
+                <h1>{props.productData.name}</h1>
+                <h2>UGX.{props.productData.price} @</h2>
               </div>
               <div className="current-quantity">
                 <p>
-                  <span>200</span> packets currently in stock
+                  <span>{props.productData.quantity}</span> packets currently in stock
                 </p>
               </div>
             </div>
-            <p>Light and beautiful</p>
+            <p>{props.productData.description}</p>
             <form action="">
               <div>
                 <label htmlFor="quantity">Quantity:</label>

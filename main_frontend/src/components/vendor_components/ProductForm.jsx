@@ -7,23 +7,48 @@ export const ProductForm = () => {
   const [image, setImage] = useState("");
   const [video, setVideo] = useState("");
 
+  const getToken = () =>
+    localStorage.getItem("access_token")
+      ? JSON.parse(localStorage.getItem("access_token"))
+      : null;
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
+    // Check if both image and video are provided or neither is provided
+    if ((image && video) || (!image && !video)) {
+      // Display an error message or take appropriate action
+      console.error(
+        "Provide either an image URL or a video URL, not both or none"
+      );
+      return;
+    }
+
     // Create an object with the form data
-    const productData = {
-      name,
-      price,
-      quantity,
-      image: image || null, // Set image to null if it's an empty string
-      video: video || null, // Set video to null if it's an empty string
-      // Add other fields as needed
-    };
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("price", price);
+    formData.append("quantity", quantity);
+    formData.append("image", image); // append the actual file object
+    formData.append("video", video);
 
     // TODO: Perform the API call to send productData to the server
     // For example, using fetch or axios
+    fetch("http://127.0.0.1:5000/products/create", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => console.log(err));
 
-    console.log("Product Data:", productData);
+    console.log("Product Data:", formData);
   };
 
   return (
@@ -67,7 +92,7 @@ export const ProductForm = () => {
         <label className="update-info-labels">
           Image URL:
           <input
-            type="text"
+            type="file"
             value={image}
             onChange={(e) => setImage(e.target.value)}
           />
@@ -77,7 +102,7 @@ export const ProductForm = () => {
         <label className="update-info-labels">
           Video URL:
           <input
-            type="text"
+            type="file"
             value={video}
             onChange={(e) => setVideo(e.target.value)}
           />

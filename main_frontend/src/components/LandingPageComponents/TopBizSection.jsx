@@ -10,23 +10,34 @@ const TopBizSection = (props) => {
     navigate(props.url);
   };
 
+  const onBusinessClick = (businessId) => {
+    setSelectedBusinessId(businessId);
+  };
+
   return (
     <div className="top-biz-section">
       <h2>
         <span>{props.title}</span>
       </h2>
       <div className="business-section">
-        <Link to={`/dashboard/vendor/profile/${id}`}>
-          <TopBizCard image={"/video/thumbnail.jpg"} name="Dummy business" />
-        </Link>
-        <TopBizCard image={"/video/thumbnail.jpg"} name="Lorem ipsum" />
-        <TopBizCard image={"/video/thumbnail.jpg"} name="Lorem ipsum" />
-        <TopBizCard image={"/video/thumbnail.jpg"} name="Lorem ipsum" />
-        <TopBizCard image={"/video/thumbnail.jpg"} name="Lorem ipsum" />
-        <TopBizCard image={"/video/thumbnail.jpg"} name="Lorem ipsum" />
-        <button onClick={onSeeMoreClick}>
+        {props.products && props.products.length > 0 ? (
+          // Map over the products if there are products
+          props.products.map((business) => (
+              <TopBizCard
+                key={business.id}
+                name={business.bus_name}
+                id={business.id}
+                user_id={business.user_id}
+                // Add any other props you need
+              />
+          ))
+        ) : (
+          // Display a message if there are no products
+          <p>No products in this category yet</p>
+        )}
+        {/* <button onClick={onSeeMoreClick}>
           <span>See More</span>
-        </button>
+        </button> */}
       </div>
     </div>
   );

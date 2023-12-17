@@ -64,6 +64,18 @@
 
 .top-biz-card .name {
   text-align: center;
+  color: black;
+}
+
+.top-biz-card button {
+  width: 80%;
+  margin: auto;
+  margin-bottom: .2rem;
+}
+
+#business-card {
+  height: auto;
+  width: 13rem;
 }
 
 @media screen and (max-width: 768px) {

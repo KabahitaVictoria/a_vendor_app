@@ -1,7 +1,7 @@
 import { useState } from "react";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "../components/Sidebar";
-import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "../theme";
 import Dashboard from "./scenes/dashboard";
 

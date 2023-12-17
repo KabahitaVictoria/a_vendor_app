@@ -17,7 +17,7 @@ const Hero = () => {
             Your Guide to Exploring Small Businesses and Their Unique Products
           </p>
         </div>
-        <div className="hero-search-bar">
+        {/* <div className="hero-search-bar">
           <form action="#">
             <div className="dropdown">
               <button className="dropbtn">All</button>
@@ -40,7 +40,7 @@ const Hero = () => {
             />
             <input type="submit" value="search" />
           </form>
-        </div>
+        </div> */}
       </div>
     </div>
   );

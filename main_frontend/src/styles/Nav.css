@@ -74,11 +74,17 @@
   align-items: center;
   padding: 2rem 0;
   width: 100vw;
+  height: 100vh;
   margin: 0 auto;
   background-color: black;
   position: fixed;
   left: 0;
   top: 0;
+  color: white;
+}
+
+.form-container h1 {
+  color: white;
 }
 
 .form-container input {
@@ -87,13 +93,19 @@
   border: 1px solid rgba(0, 0, 0, 0.644);
   background-color: white;
   color: black;
-  width: 90%;
+  width: 30%;
   margin: 0.25rem;
+  margin-top: 2rem;
+}
+
+.form2 > input {
+  /* padding: 0; */
+  margin: 0.2rem;
 }
 
 .form-container button {
   padding: 0.6em 1em;
-  width: 30%;
+  width: 10%;
   margin: 0.5em auto 0 auto;
   margin-top: 1rem;
   background-color: #5672f9;
@@ -155,4 +167,16 @@
   width: 70%;
   margin: 0 auto;
   background-color: black;
+}
+
+.error {
+  color: rgba(255, 0, 0, 0.774);
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+/* MUI */
+.placeholderCenter input::placeholder {
+ text-align: center;
 }

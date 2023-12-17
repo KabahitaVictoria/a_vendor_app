@@ -14,7 +14,7 @@ class Location(db.Model):
    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
    
    #relationships
-   businesses = db.relationship('Business', backref='location')   
+   # businesses = db.relationship('Business', backref='location')   
 
    def __init__(self,lo_name,strt_address,city,phone):
       self.lo_name = lo_name

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
-import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/Star";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import { Box } from "@mui/material";
 
 const StarRating = ({
   precision = 1,

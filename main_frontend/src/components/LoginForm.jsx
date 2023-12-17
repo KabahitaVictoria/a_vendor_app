@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SignUpForm } from "./LandingPageComponents/SignUpForm";
 import SellerSignInForm from "./LandingPageComponents/SellerSignInForm";
@@ -9,11 +9,37 @@ function LoginForm({ closeForm, handleLogin }) {
   const [password, setPassword] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [data, setData] = useState("");
+  const [contactError, setContactError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [showSellerLoginForm, setShowSellerLoginForm] = useState(false);
 
   const navigate = useNavigate();
+
+    useEffect(() => {
+      if (hasSubmitted) {
+        let isValid = true;
+
+        if (!contact) {
+          setContactError("Contact number is required");
+          isValid = false;
+        } else {
+          setContactError("");
+        }
+
+        if (!password) {
+          setPasswordError("Password is required");
+          isValid = false;
+        } else {
+          setPasswordError("");
+        }
+
+        if (isValid) {
+          handleLoginUser;
+        }
+      }
+    }, [hasSubmitted]);
 
   function handleLoginUser(e) {
     e.preventDefault();
@@ -45,17 +71,19 @@ function LoginForm({ closeForm, handleLogin }) {
               JSON.stringify(data.for.first_name)
             );
             navigate(`/dashboard/customer/${data.for.id}`);
+            window.location.reload();
           }
-        } else if (data.error) {
-          setData(data.error);
+        } else if (data.contact_error) {
+          setContactError(data.contact_error);
+        } else if (data.password_error) {
+          console.log("data.password_error:", data.password_error);
+          setPasswordError(data.password_error);
         }
       })
       .catch((err) => console.log(err));
 
     // Set state to indicate form submission
     setHasSubmitted(!hasSubmitted);
-
-    navigate("/dashboard");
   }
 
   const toggleSignUpForm = () => {
@@ -86,8 +114,12 @@ function LoginForm({ closeForm, handleLogin }) {
         name="contact"
         required
         value={contact}
-        onChange={(e) => setContact(e.target.value)}
+        onChange={(e) => {
+          setContact(e.target.value);
+          setContactError("");
+        }}
       ></input>
+      <p className="error">{contactError}</p>
 
       <input
         type="password"
@@ -95,15 +127,16 @@ function LoginForm({ closeForm, handleLogin }) {
         name="psw"
         required
         value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => {
+          setPassword(e.target.value);
+          setPasswordError("");
+        }}
       ></input>
+      <p className="error">{passwordError}</p>
 
       {/* Creating a button to submit the login form and a button to close the form */}
       <button type="submit" className="btn" onClick={handleLoginUser}>
         Login
-      </button>
-      <button type="button" className="btn-cancel" onClick={closeForm}>
-        Close
       </button>
 
       {showSignUpForm && (
@@ -124,7 +157,7 @@ function LoginForm({ closeForm, handleLogin }) {
 
       <p>
         Have no account yet?{" "}
-        <a href="#" onClick={toggleSignUpForm}>
+        <a href="/login_or_register/signup" onClick={toggleSignUpForm}>
           Register now
         </a>
         .

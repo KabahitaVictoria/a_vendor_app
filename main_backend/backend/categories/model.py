@@ -9,14 +9,13 @@ class Category(db.Model):
 
    id = db.Column(db.Integer, primary_key = True)
    name = db.Column(db.String(100), unique = True)
-   description = db.Column(db.String(100), unique = True)
-   image = db.Column(db.String(255),unique = True)
    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
    businesses_id = db.Column(db.Integer, db.ForeignKey('businesses.id'))
 
    #relationships
-   products = db.relationship('Product', backref='category')
+   products = db.relationship('Product', backref='category', lazy='dynamic')
 
 class CategorySchema(ma.SQLAlchemyAutoSchema):
    class Meta:
       model = Category
+      load_instance = True

@@ -1,4 +1,3 @@
-import React from "react";
 import PropTypes from "prop-types";
 import CategoriesCard from "../components/LandingPageComponents/CategoriesCard";
 import "../styles/Sidebar.css";
@@ -11,7 +10,6 @@ const Sidebar = (props) => {
   const onHealthAndBeautyClick = () => {
     navigate("/dashboard/health-and-beauty");
   };
-<<<<<<< HEAD
 
   const getToken = () =>
     localStorage.getItem("access_token")
@@ -38,11 +36,6 @@ const Sidebar = (props) => {
     } else {
       alert("Please sign in to access your account.");
     }
-=======
-
-  const onAccountClick = () => {
-    navigate("/dashboard/account");
->>>>>>> d37283c3019152dcc2b047a9ab5760e14a9f1928
   };
 
   const closeSidebar = () => {

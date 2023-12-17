@@ -1,0 +1,25 @@
+.vendor-form-div, .vendor-form-div form {
+    display: flex;
+    flex-direction: column;
+}
+
+.vendor-form-div form label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: .75rem 0;
+}
+
+.vendor-form-div input {
+    padding: .5rem;
+}
+
+.vendor-form-div button {
+    padding: .5rem;
+    width: 50%;
+    margin: 0 auto 2rem auto;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 10px;
+}

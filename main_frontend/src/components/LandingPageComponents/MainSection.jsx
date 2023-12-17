@@ -2,23 +2,23 @@ import "../../styles/MainSection.css";
 import TopBizSection from "./TopBizSection";
 import Ads from "../Ads";
 
-const MainSection = () => {
+const MainSection = ({ businessCategories }) => {
+
   return (
     <div className="main-section">
       <div className="top-businesses">
         <h2>
-          <span>Top Businesses In...</span>
+          <span>Businesses In...</span>
         </h2>
-        <TopBizSection
-          title="Health and Beauty"
-          url="/dashboard/top-in-health-and-beauty"
-        />
-        <TopBizSection title="Services" />
-        <TopBizSection title="Furniture" />
-        <TopBizSection title="Electronics" />
-        <TopBizSection title="Fashion" />
-        <TopBizSection title="Home Appliances" />
-        <TopBizSection title="Retail" />
+        {businessCategories &&
+          businessCategories.map((category) => (
+            <TopBizSection
+              key={category.id}
+              title={category.name}
+              products={category.products}
+              // Add any other props you need
+            />
+          ))}
       </div>
       <Ads />
     </div>

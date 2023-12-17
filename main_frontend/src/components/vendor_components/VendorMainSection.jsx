@@ -1,13 +1,45 @@
 import Ads from "../Ads";
 import ProductSection from "../BusinessProfileComponents/ProductSection";
 import "../../styles/BizMainSection.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const VendorMainSection = () => {
+const VendorMainSection = ({ userType }) => {
+  const { businessId, id } = useParams();
+  const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+
+  const getToken = () =>
+    localStorage.getItem("access_token")
+      ? JSON.parse(localStorage.getItem("access_token"))
+      : null;
+
+  useEffect(() => {
+    // Fetch existing categories from the server
+    fetch(`http://localhost:5000/categories/${businessId}/`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setCategories(data.data || []);
+        console.log("categories data:", data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  function onAddProductClick() {
+    console.log("ID:", id);
+    navigate(`/dashboard/business/${businessId}/upload_product/vendor/${id}`);
+  }
+
   return (
     <div className="biz-main-section">
       <div className="main-content">
         <div className="biz-main-content">
-          <div className="main-content-div">
+          {/* <div className="main-content-div">
             <div className="vendor-video-heading">
               <h3>Take a tour into our shop...</h3>
               <input type="file" id="custom-file-input" />
@@ -34,17 +66,25 @@ const VendorMainSection = () => {
                 </a>
               </p>
             </video>
-          </div>
+          </div> */}
           <div className="main-content-div">
             <div className="products-heading">
               <h3>Our Products</h3>
-              <a href="/dashboard/vendor/upload_product">
-                <button>Add New Product</button>
-              </a>
+              {userType == "vendor" ? (
+                <button onClick={onAddProductClick}>Add New Product</button>
+              ) : (
+                <p></p>
+              )}
             </div>
             <div className="" id="biz-pdts">
-              <ProductSection title="Top Products" />
-              <ProductSection title="Braids" />
+              {categories.map((category) => (
+                <ProductSection
+                  key={category.id}
+                  title={category.name}
+                  products={category.products} // Pass the products associated with the category
+                  userType={userType}
+                />
+              ))}
             </div>
           </div>
         </div>
