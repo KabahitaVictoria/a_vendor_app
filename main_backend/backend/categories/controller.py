@@ -12,7 +12,7 @@ all_categories = Blueprint('categories', __name__,url_prefix='/categories')
 #create the categories endpoints
 # get all
 @all_categories.route('/<int:id>/', methods =['GET'])
-@jwt_required()
+# @jwt_required()
 def categories(id):
     categories = Category.query.filter_by(businesses_id=id).all()
 

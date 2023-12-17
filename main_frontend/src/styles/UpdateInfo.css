@@ -104,3 +104,24 @@
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
 }
+
+.single-product-vendor-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.product-main-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.product-main-section textarea {
+  /* width: 100%; */
+  margin: 0 auto;
+}
+
+.product-main-section h2 {
+  text-align: center;
+}

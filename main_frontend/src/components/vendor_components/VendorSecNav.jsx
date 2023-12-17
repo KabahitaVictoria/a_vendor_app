@@ -44,7 +44,7 @@ const VendorSecNav = () => {
         variant="contained"
         color="primary"
         startIcon={<NotificationsOutlined />}
-        // onClick={onNotifClick}
+        onClick={onNotifClick}
       >
         Notifications
       </Button>

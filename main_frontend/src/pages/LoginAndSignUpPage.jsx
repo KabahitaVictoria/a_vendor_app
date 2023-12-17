@@ -25,7 +25,7 @@ const LoginAndSignUpPage = () => {
 
   return (
     <div className="">
-      <div className="form-container">
+      <div className="">
         {activeForm === "signup" && (
           <SignUpForm closeForm={() => toggleForm(null)} />
         )}

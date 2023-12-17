@@ -1,6 +1,5 @@
 import { useState } from "react";
-import LoginForm from "../LoginForm";
-import { SellerSignUpForm } from "./SellerSignUpForm";
+import { TextField, Button, Link, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 export const SignUpForm = () => {
@@ -60,78 +59,111 @@ export const SignUpForm = () => {
 
   return (
     <>
-      <h1>
-        <span>Customer Sign Up</span>
-      </h1>
-      <a href="/login_or_register/sellerSignup" className="signin">
-        Sign Up As A Seller
-      </a>
-      <p className="error">{error}</p>
-      {/* Display message if form has been submitted */}
-      <form onSubmit={handleFormSubmit} className="form2">
-        <input
-          type="text"
-          placeholder="Enter Your First Name"
+      <Box
+        onSubmit={handleFormSubmit}
+        width="30%"
+        margin="0 auto"
+        component="form"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <h1>
+          <span>Customer Sign Up</span>
+        </h1>
+        <Box
+          color="black"
+          padding=".5rem"
+          component="a"
+          href="/login_or_register/sellerSignup"
+        >
+          {/* <a href="/login_or_register/sellerSignup" className="signin">
+          </a> */}
+          Sign Up As A Seller
+        </Box>
+        <p className="error">{error}</p>
+        <TextField
+          fullWidth
+          label="First Name"
           name="firstName"
           required
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-        ></input>
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
-          type="text"
-          placeholder="Enter Your Last Name"
+        <TextField
+          fullWidth
+          label="Last Name"
           name="lastName"
           required
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-        ></input>
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
-          type="text"
-          placeholder="Enter Your Contact"
+        <TextField
+          fullWidth
+          label="Contact"
           name="contact"
           required
           value={contact}
           onChange={(e) => setContact(e.target.value)}
-        ></input>
+          type="number"
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
-          type="email"
-          placeholder="Enter Your Email"
+        <TextField
+          fullWidth
+          label="Email"
           name="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        ></input>
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
-          type="password"
-          placeholder="Enter Password"
+        <TextField
+          fullWidth
+          label="Password"
           name="password"
           required
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        ></input>
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
-          type="password"
-          placeholder="Confirm Password"
+        <TextField
+          fullWidth
+          label="Confirm Password"
           name="confirmPassword"
           required
+          type="password"
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
-        ></input>
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        {/* Submit form details */}
-        <button type="submit" className="btn">
-          Sign Up
-        </button>
-      </form>
+        <Box width="60%">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            style={{ backgroundColor: "black" }}
+          >
+            Sign Up
+          </Button>
+        </Box>
 
-      <p>
-        Already registered? <a href="/login_or_register/login">Log In</a>.
-      </p>
+        <p>
+          Already registered?{" "}
+          <Link href="/login_or_register/login" underline="none">
+            Log In
+          </Link>
+          .
+        </p>
+      </Box>
     </>
   );
 };

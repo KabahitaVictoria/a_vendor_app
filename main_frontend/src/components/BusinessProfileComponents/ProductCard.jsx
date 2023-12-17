@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import {
   Dialog,
   DialogActions,
@@ -7,9 +7,11 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 
 
 const ProductCard = (props) => {
+  const [openDialog, setOpenDialog] = useState(false);
   const navigate = useNavigate();
   const { businessId, id, customerId } = useParams();
 
@@ -27,6 +29,28 @@ const ProductCard = (props) => {
       `/dashboard/business/${businessId}/single_product/${props.productId}/vendor/${id}/customer/${customerId}`
     );
   }
+
+  const handleOrderButtonClick = () => {
+    const accessToken = localStorage.getItem("access_token");
+
+    if (!accessToken) {
+      // Show the dialog box
+      setOpenDialog(true);
+    } else {
+      // Redirect to the order page
+      onClickOrder();
+    }
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDialogLoginClick = () => {
+    handleDialogClose();
+    navigate("/login_or_register/login");
+  };
+
 
   return (
     <div className="pdt-card top-biz-card" id="pdt-card">
@@ -46,15 +70,19 @@ const ProductCard = (props) => {
       <div className="product-buttons">
         {props.userType === "vendor" ? (
           <>
-            <Button onClick={onClickUpdate} id="update-button">
-              Update
-            </Button>
-            <Button id="delete-button" onClick={props.handleClickOpen}>
-              Delete
-            </Button>
+            <Box paddingRight=".05rem">
+              <Button onClick={onClickUpdate} id="update-button">
+                Update
+              </Button>
+            </Box>
+            <Box paddingLeft=".1rem">
+              <Button id="delete-button" onClick={props.handleClickOpen}>
+                Delete
+              </Button>
+            </Box>
           </>
         ) : (
-          <button>Order</button>
+          <button onClick={handleOrderButtonClick}>Order</button>
         )}
 
         {/* Delete Confirmation Dialog */}
@@ -71,6 +99,24 @@ const ProductCard = (props) => {
             </Button>
             <Button onClick={onClickDelete} color="primary" autoFocus>
               Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+        {/* order dialog box */}
+        <Dialog open={openDialog} onClose={handleDialogClose}>
+          <DialogTitle>{"Please Log In"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To place an order, you need to log in.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleDialogClose} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleDialogLoginClick} color="primary" autoFocus>
+              Log In
             </Button>
           </DialogActions>
         </Dialog>

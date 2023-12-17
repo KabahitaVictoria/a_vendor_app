@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { TextField, Button, Link, Box } from "@mui/material";
 
 export const SellerSignUpForm = (props) => {
   const [firstName, setFirstName] = useState("");
@@ -58,80 +59,108 @@ export const SellerSignUpForm = (props) => {
 
   return (
     <>
-      <h1>
-        <span>Seller Sign Up</span>
-      </h1>
-      <p className="error">{error}</p>
-      <a href="/login_or_register/signup" className="signin">
-        Sign Up As A Customer
-      </a>
-      {/* Display message if form has been submitted */}
-      <form onSubmit={handleFormSubmit} className="form2">
-        <input
+      <Box
+        onSubmit={handleFormSubmit}
+        component="form"
+        width="30%"
+        margin="0 auto"
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <h1>
+          <span>Seller Sign Up</span>
+        </h1>
+        <p className="error">{error}</p>
+        <Link href="/login_or_register/signup" className="signin">
+          Sign Up As A Customer
+        </Link>
+        <Box paddingBottom=".5rem"></Box>
+
+        <TextField
           type="text"
-          placeholder="Enter Your First Name"
+          label="Enter Your First Name"
           name="firstName"
           required
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
           className="form2-input"
-        ></input>
+          fullWidth
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
+        <TextField
           type="text"
-          placeholder="Enter Your Last Name"
+          label="Enter Your Last Name"
           name="lastName"
           required
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-        ></input>
+          fullWidth
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
-          type="text"
-          placeholder="Enter Your Contact"
+        <TextField
+          type="number"
+          label="Enter Your Contact"
           name="contact"
           required
           value={contact}
           onChange={(e) => setContact(e.target.value)}
-        ></input>
+          fullWidth
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
+        <TextField
           type="email"
-          placeholder="Enter Your Email"
+          label="Enter Your Email"
           name="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-        ></input>
+          fullWidth
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
+        <TextField
           type="password"
-          placeholder="Enter Password"
+          label="Enter Password"
           name="password"
           required
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-        ></input>
+          fullWidth
+        />
+        <Box paddingBottom=".5rem"></Box>
 
-        <input
+        <TextField
           type="password"
-          placeholder="Confirm Password"
+          label="Confirm Password"
           name="confirmPassword"
           required
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
-        ></input>
+          fullWidth
+        />
+        <Box paddingBottom=".5rem"></Box>
 
         {/* Submit form details */}
-        <button type="submit" className="btn">
-          Sign Up
-        </button>
-      </form>
-
-      <p>
-        Already registered?{" "}
-        <a href="/login_or_register/sellerSignin">Log In as Seller</a>.
-      </p>
+        <Box width="60%">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            style={{ backgroundColor: "black" }}
+          >
+            Sign Up
+          </Button>
+        </Box>
+        <p>
+          Already registered?{" "}
+          <Link href="/login_or_register/sellerSignin">Log In as Seller</Link>.
+        </p>
+      </Box>
     </>
   );
 };

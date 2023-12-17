@@ -9,6 +9,7 @@ class Business(db.Model):
 
    from backend.categories.model import Category
    from backend.products.model import Product
+   from backend.notifications.model import Notification
 
    id = db.Column(db.Integer, primary_key = True)
    bus_name = db.Column(db.String(100), unique = True)
@@ -25,6 +26,7 @@ class Business(db.Model):
    #relationships
    products = db.relationship('Product', backref='business')
    categories = db.relationship('Category',backref='business')
+   notifications = db.relationship('Notification', backref='business', lazy=True)
 
 class BusinessSchema(ma.SQLAlchemyAutoSchema):
    class Meta:

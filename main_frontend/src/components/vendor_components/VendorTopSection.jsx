@@ -15,9 +15,9 @@ const VendorTopSection = (props) => {
         <div className="biz-description">
           <div className="biz-heading-and-rating">
             <h2>{props.bus_name}</h2>
-            <a href="/dashboard/all_ratings">
+            {/* <a href="/dashboard/all_ratings">
               <Rating name="read-only" value={4} readOnly />
-            </a>
+            </a> */}
           </div>
           <p>{props.description}</p>
           <div className="biz-location" id="biz-info">

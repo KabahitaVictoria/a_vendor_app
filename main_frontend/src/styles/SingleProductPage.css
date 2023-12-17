@@ -132,7 +132,7 @@
 
 #update-pdt-form textarea {
     width: 90%;
-    margin: .5rem 0;
+    margin: .5rem auto;
 }
 
 @media screen and (max-width:1000px) {

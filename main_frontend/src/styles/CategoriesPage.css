@@ -10,7 +10,7 @@
 .top h1 {
    color: white;
    margin-left: .75rem;
-   font-family: "Pacifico", cursive;
+   /* font-family: "Pacifico", cursive; */
    text-transform: lowercase;
 }
 
@@ -21,7 +21,7 @@
 /* top businesses */
 .top-in-health-and-beauty h1 {
     text-align: center;
-    font-family: "Pacifico", cursive;
+    /* font-family: "Pacifico", cursive; */
     color: #000B4F;
 }
 

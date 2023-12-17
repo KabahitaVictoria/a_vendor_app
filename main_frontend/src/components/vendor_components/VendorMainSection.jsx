@@ -3,23 +3,24 @@ import ProductSection from "../BusinessProfileComponents/ProductSection";
 import "../../styles/BizMainSection.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Button } from "@mui/material";
 
 const VendorMainSection = ({ userType }) => {
   const { businessId, id } = useParams();
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
 
-  const getToken = () =>
-    localStorage.getItem("access_token")
-      ? JSON.parse(localStorage.getItem("access_token"))
-      : null;
+  // const getToken = () =>
+  //   localStorage.getItem("access_token")
+  //     ? JSON.parse(localStorage.getItem("access_token"))
+  //     : null;
 
   useEffect(() => {
     // Fetch existing categories from the server
     fetch(`http://localhost:5000/categories/${businessId}/`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${getToken()}`,
+        // Authorization: `Bearer ${getToken()}`,
       },
     })
       .then((res) => res.json())

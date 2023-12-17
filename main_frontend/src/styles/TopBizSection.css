@@ -11,7 +11,7 @@
 .business-section {
   display: flex;
   align-items: center;
-  background-color: #d9d9d9;
+  background-color: #d9d9d91e;
   padding: 1rem;
   font-size: 0.8rem;
   overflow-x: auto; /* Enable horizontal scrolling */
@@ -21,6 +21,7 @@
   scrollbar-color: #ccc transparent; /* Set scrollbar color */
   border-radius: 10px; /* Add rounded corners */
   padding-bottom: 10px; /* Add padding to the bottom to make space for the scrollbar */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.466);
 }
 
 .business-section::-webkit-scrollbar {

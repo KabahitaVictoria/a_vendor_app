@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { TextField, Button, Link, Box } from "@mui/material";
 
 function SellerSignInForm(props) {
   const [contact, setContact] = useState("");
@@ -85,31 +86,44 @@ function SellerSignInForm(props) {
   }
 
   return (
-    <>
+    <Box
+      width="30%"
+      margin="0 auto"
+      component="form"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
+    >
       <h1>
         <span>Seller Login</span>
       </h1>
 
-      <a href="/login_or_register/login" className="signin">
+      <Link href="/login_or_register/login" className="signin">
         Login As A Customer
-      </a>
+      </Link>
+      <Box paddingBottom=".5rem"></Box>
 
-      <input
-        type="tel"
-        placeholder="Enter Phone Number"
+      <TextField
+        fullWidth
+        type="number"
         name="contact"
+        label="Enter Phone Number"
         required
         value={contact}
         onChange={(e) => {
           setContact(e.target.value);
           setContactError("");
         }}
-      ></input>
+      />
       <p className="error">{contactError}</p>
+      <Box paddingBottom=".5rem"></Box>
 
-      <input
+      <TextField
+        fullWidth
         type="password"
-        placeholder="Enter Password"
+        label="Enter Password"
         name="psw"
         required
         value={password}
@@ -117,19 +131,32 @@ function SellerSignInForm(props) {
           setPassword(e.target.value);
           setPasswordError("");
         }}
-      ></input>
+      />
       <p className="error">{passwordError}</p>
+      <Box paddingBottom=".5rem"></Box>
 
       {/* Creating a button to submit the login form and a button to close the form */}
-      <button type="submit" className="btn" onClick={handleLoginUser}>
-        Login
-      </button>
+      <Box width="60%">
+        <Button
+          type="submit"
+          className="btn"
+          onClick={handleLoginUser}
+          fullWidth
+          variant="contained"
+          style={{ backgroundColor: "black" }}
+        >
+          Login
+        </Button>
+      </Box>
 
       <p>
         Have no account yet?{" "}
-        <a href="/login_or_register/sellerSignup">Register now as a Seller</a>.
+        <Link href="/login_or_register/sellerSignup">
+          Register now as a Seller
+        </Link>
+        .
       </p>
-    </>
+    </Box>
   );
 }
 

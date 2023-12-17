@@ -1,6 +1,16 @@
 import "../../styles/UpdateInfo.css";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from "@mui/material";
 
 const SinglePdtVendorMain = () => {
   const [productData, setProductData] = useState([]);
@@ -67,54 +77,17 @@ const SinglePdtVendorMain = () => {
   return (
     <div className="single-product-vendor-main">
       <div className="product-main-section">
-        {/* <div className="see-product-section">
-          <div className="heading">
-            <h3>Product Video</h3>
-            <input type="file" className="custom-file-input" />
-          </div>
-          <video
-            id="my-video"
-            className="video-js"
-            controls
-            preload="auto"
-            width="640"
-            height="264"
-            poster="/video/thumbnail.jpg"
-            data-setup="{}"
-          >
-            <source src="/video/videoplayback.mp4" type="video/mp4" />
-            <p className="vjs-no-js">
-              To view this video please enable JavaScript, and consider
-              upgrading to a web browser that
-              <a
-                href="https://videojs.com/html5-video-support/"
-                target="_blank"
-              >
-                supports HTML5 video
-              </a>
-            </p>
-          </video>
-        </div> */}
         <form action="" id="update-pdt-form" className="product-user-order" onSubmit={handleUpdateProductSubmit}>
           <div className="product-update-form">
-            {/* <label htmlFor="product-name" className="update-info-labels">
-              <b>Product Name</b>
-              
-            </label> */}
-            {/* <input
-              type="text"
-              placeholder="Enter New Product Name"
-              name="product-name"
-            ></input> */}
             <h2>
               <b className="current">{productData.name}</b>
             </h2>
 
             <label htmlFor="product-price" className="update-info-labels">
               <b>Product Price</b>
-              <p>
+              {/* <p>
                 <b className="current">current:</b> {productData.price} @
-              </p>
+              </p> */}
             </label>
             <input
               type="number"
@@ -125,9 +98,9 @@ const SinglePdtVendorMain = () => {
             ></input>
             <label htmlFor="product-stock" className="update-info-labels">
               <b>Quantity in Stock</b>
-              <p>
+              {/* <p>
                 <b className="current">current:</b> {productData.quantity}
-              </p>
+              </p> */}
             </label>
             <input
               type="number"

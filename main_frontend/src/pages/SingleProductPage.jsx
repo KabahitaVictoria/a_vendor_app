@@ -28,6 +28,7 @@ const SingleProductPage = () => {
       .then((res) => res.json())
       .then((data) => {
         const productData = data.data;
+        console.log("Product Data: ", productData);
         setProductData(productData);
       })
       .catch((err) => console.log(err));
@@ -53,7 +54,7 @@ const SingleProductPage = () => {
       <DashNav />
       <SecNav />
       <ProductNav bus_name={business.bus_name} productName={productData.name} />
-      <SinglePdtMain productData={productData} />
+      <SinglePdtMain productData={productData} businessId={businessId} id={id} productId={productId} />
     </div>
   );
 };

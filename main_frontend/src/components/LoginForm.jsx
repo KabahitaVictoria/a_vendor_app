@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { SignUpForm } from "./LandingPageComponents/SignUpForm";
 import SellerSignInForm from "./LandingPageComponents/SellerSignInForm";
+import { TextField, Button, Link, Box } from "@mui/material";
 
 function LoginForm({ closeForm, handleLogin }) {
   // console.log(props);
@@ -95,22 +96,33 @@ function LoginForm({ closeForm, handleLogin }) {
   };
 
   return (
-    <>
+    <Box
+      width="30%"
+      margin="0 auto"
+      component="form"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      height="100vh"
+    >
       <h1>
         <span>Customer Login</span>
       </h1>
 
-      <a
-        href="#sellersignin"
+      <Link
+        href="/login_or_register/sellerSignin"
         className="signin"
         onClick={toggleSellerLoginForm}
       >
         Sign In As A Seller
-      </a>
+      </Link>
+      <Box paddingBottom=".5rem"></Box>
 
-      <input
-        type="tel"
-        placeholder="Enter Phone Number"
+      <TextField
+        fullWidth
+        type="number"
+        label="Enter Phone Number"
         name="contact"
         required
         value={contact}
@@ -118,51 +130,47 @@ function LoginForm({ closeForm, handleLogin }) {
           setContact(e.target.value);
           setContactError("");
         }}
-      ></input>
+      />
       <p className="error">{contactError}</p>
+      <Box paddingBottom=".5rem"></Box>
 
-      <input
+      <TextField
         type="password"
-        placeholder="Enter Password"
+        label="Enter Password"
         name="psw"
         required
+        fullWidth
         value={password}
         onChange={(e) => {
           setPassword(e.target.value);
           setPasswordError("");
         }}
-      ></input>
+      />
       <p className="error">{passwordError}</p>
+      <Box paddingBottom=".5rem"></Box>
 
       {/* Creating a button to submit the login form and a button to close the form */}
-      <button type="submit" className="btn" onClick={handleLoginUser}>
-        Login
-      </button>
-
-      {showSignUpForm && (
-        <div className="form-popup">
-          <div className="form-container">
-            <SignUpForm closeForm={toggleSignUpForm} />
-          </div>
-        </div>
-      )}
-
-      {showSellerLoginForm && (
-        <div className="form-popup">
-          <div className="form-container">
-            <SellerSignInForm closeForm={toggleSellerLoginForm} />
-          </div>
-        </div>
-      )}
+      <Box width="60%">
+        <Button
+          type="submit"
+          className="btn"
+          onClick={handleLoginUser}
+          variant="contained"
+          style={{ backgroundColor: "black" }}
+          fullWidth
+        >
+          Login
+        </Button>
+      </Box>
 
       <p>
         Have no account yet?{" "}
-        <a href="/login_or_register/signup" onClick={toggleSignUpForm}>
+        <Link href="/login_or_register/signup" onClick={toggleSignUpForm}>
           Register now
-        </a>
+        </Link>
         .
       </p>
-    </>
+    </Box>
   );
 }
 
