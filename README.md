@@ -1,5 +1,14 @@
 # SmallBizSafari Vendor Business App
 ## CURRENT PROGRESS
+## ----------IMPORTANT -------------
+- Vendor can create, update and delete products.
+- Vendor can see notifications from users after they order
+- User can order and notification sends to vendor
+
+## ---TODO---
+- Connect sidebar to the various businesses
+- Add user orders to cart
+
 ## Backend
 - Endpoints are all protected and ready to test
 
