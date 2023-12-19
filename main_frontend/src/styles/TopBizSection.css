@@ -22,6 +22,7 @@
   border-radius: 10px; /* Add rounded corners */
   padding-bottom: 10px; /* Add padding to the bottom to make space for the scrollbar */
   border-bottom: 1px solid rgba(0, 0, 0, 0.466);
+  margin-bottom: 2rem;
 }
 
 .business-section::-webkit-scrollbar {
@@ -40,10 +41,14 @@
 }
 
 .business-section button {
-  background-color: #fe9800;
+  /* background-color: #fe9800; */
   border: none;
   padding: 0.5rem;
   font-weight: bold;
+}
+
+.business-section .order-btn {
+  background-color: #fe9800;
 }
 
 /* cards */
@@ -77,6 +82,7 @@
 #business-card {
   height: auto;
   width: 13rem;
+  font-size: 14px;
 }
 
 @media screen and (max-width: 768px) {

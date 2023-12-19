@@ -19,6 +19,7 @@ const LandingPage = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+  
   return (
     <div className="landing-page">
       <Nav />

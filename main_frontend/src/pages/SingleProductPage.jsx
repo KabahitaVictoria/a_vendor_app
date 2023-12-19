@@ -9,7 +9,7 @@ import { useParams, useNavigate } from "react-router-dom";
 const SingleProductPage = () => {
   const [productData, setProductData] = useState([]);
   const [business, setBusiness] = useState([]);
-  const { businessId, productId, id } = useParams();
+  const { businessId, productId, id, customerId } = useParams();
   const navigate = useNavigate();
 
   const getToken = () =>
@@ -54,7 +54,7 @@ const SingleProductPage = () => {
       <DashNav />
       <SecNav />
       <ProductNav bus_name={business.bus_name} productName={productData.name} />
-      <SinglePdtMain productData={productData} businessId={businessId} id={id} productId={productId} />
+      <SinglePdtMain productData={productData} businessId={businessId} id={id} productId={productId} customerId={customerId} />
     </div>
   );
 };

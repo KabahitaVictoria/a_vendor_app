@@ -16,10 +16,6 @@ const VendorSecNav = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const onCartClick = () => {
-    navigate("/dashboard/cart-page");
-  };
-
   const onNotifClick = () => {
     navigate(`/dashboard/business/${businessId}/notifications/vendor/${id}`);
   }
@@ -33,10 +29,6 @@ const VendorSecNav = () => {
       </button>
       {/* <button className="sell-button">SELL</button> */}
 
-      {/* <div className="cart-info" title="cart" onClick={onCartClick}>
-        <img src="/icons/cart.png" alt="" />
-        <p>0</p>
-      </div> */}
 
       {/* Add a profile icon next to the cart icon */}
       <div className="profile-info cart-info" title="profile">

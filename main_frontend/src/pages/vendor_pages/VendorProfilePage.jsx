@@ -1,5 +1,6 @@
 import DashNav from "../../components/UserDashboardComponents/DashNav";
 import Nav from "../../components/Nav";
+import SecNav from "../../components/SecNav";
 import VendorSecNav from "../../components/vendor_components/VendorSecNav";
 import VendorTopSection from "../../components/vendor_components/VendorTopSection";
 import VendorMainSection from "../../components/vendor_components/VendorMainSection";
@@ -43,7 +44,7 @@ const VendorProfilePage = () => {
   return (
     <div className="business-profile-page">
       {getToken() ? <DashNav /> : <Nav />}
-      <VendorSecNav />
+      {getUserType() == "vendor" ? <VendorSecNav /> : <SecNav/>}
       <VendorTopSection
         icon={business.icon}
         bus_name={business.bus_name}

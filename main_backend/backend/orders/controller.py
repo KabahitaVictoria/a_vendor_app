@@ -1,6 +1,7 @@
 #importing libraries
 from flask import jsonify, request, Blueprint
 from backend.orders.model import Order
+from backend.users.model import User
 from flask_jwt_extended import jwt_required
 from backend.db import db
 
@@ -27,16 +28,13 @@ def orders():
      return {"count":len(orders), "orders":results} 
 
 # create new
-@all_orders.route('/create', methods =['POST','GET'])
+@all_orders.route('/create/<int:id>', methods =['POST','GET'])
 @jwt_required()
-def new_order():
+def new_order(id):
     
     name = request.json['name']
     quantity = request.json['quantity']
-    status = request.json['status']
-    order_date = request.json['order_date']
-    user_id = request.json['user_id']
-    carts_id = request.json['carts_id']
+    user_id = User.query.get(id).id
 
     #validations
     if not name:
@@ -46,12 +44,19 @@ def new_order():
         return jsonify({'error': "Enter the quantity"})
 
     #storing the new reviews data
-    new_order = Order( name=name, quantity=quantity,status=status,order_date=order_date,user_id=user_id,carts_id=carts_id)
+    new_order = Order( name=name, quantity=quantity,user_id=user_id,)
 
     #add the new review
     db.session.add(new_order)
     db.session.commit()
-    return jsonify({'success':True, 'message':'Order successful! '}), 201
+    return jsonify({'success':True, 'message':'Order successful!', 'data': {
+        "id":new_order.id,
+        "name":new_order.name,
+        "quantity":new_order.quantity,
+        # "for": {
+
+        # }
+    }}), 201
 
 
 #reading

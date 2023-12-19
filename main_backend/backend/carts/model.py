@@ -6,7 +6,7 @@ from datetime import datetime
 class Cart(db.Model):
    __tablename__ = "carts"
 
-   from backend.orders.model import Order
+   # from backend.orders.model import Order
 
    id = db.Column(db.Integer, primary_key = True)
    quantity = db.Column(db.String(100),unique = False)
@@ -18,7 +18,7 @@ class Cart(db.Model):
    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
 
    #relationships
-   orders = db.relationship('Order',backref='cart')
+   # orders = db.relationship('Order',backref='cart')
    
 
    def __init__(self,quantity,price,status,TT_price,promotion,coupon_code):

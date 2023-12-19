@@ -3,6 +3,7 @@ from flask_jwt_extended import jwt_required
 from backend.db import db
 from backend.business_categories.model import BusinessCategory, BusinessCategorySchema
 from backend.businesses.model import Business, BusinessSchema
+import os
 
 business_category_bp = Blueprint('business_categories', __name__,url_prefix='/business_categories')
 business_category_schema = BusinessCategorySchema()
@@ -40,6 +41,7 @@ def get_all_business_categories():
 
         business_schema = BusinessSchema(many=True)
         business_category_data['products'] = business_schema.dump(businesses)
+        business_category_data['icon'] = "/icons/" + os.path.basename(business_category_data['icon'])
         
         business_categories_with_businesses.append(business_category_data)
 

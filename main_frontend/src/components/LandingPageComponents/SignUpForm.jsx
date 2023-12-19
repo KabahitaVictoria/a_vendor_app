@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { TextField, Button, Link, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Link,
+  Box,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
 export const SignUpForm = () => {
@@ -12,6 +20,11 @@ export const SignUpForm = () => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [data, setData] = useState("");
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleConfirmPasswordChange = (e) => {
     setConfirmPassword(e.target.value);
@@ -124,24 +137,44 @@ export const SignUpForm = () => {
         <Box paddingBottom=".5rem"></Box>
 
         <TextField
-          fullWidth
-          label="Password"
-          name="password"
+          type={showPassword ? "text" : "password"}
+          label="Enter Password"
+          name="psw"
           required
-          type="password"
+          fullWidth
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handleClickShowPassword}>
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <Box paddingBottom=".5rem"></Box>
 
         <TextField
-          fullWidth
+          type={showPassword ? "text" : "password"}
           label="Confirm Password"
           name="confirmPassword"
           required
-          type="password"
+          fullWidth
           value={confirmPassword}
           onChange={handleConfirmPasswordChange}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={handleClickShowPassword}>
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
         <Box paddingBottom=".5rem"></Box>
 

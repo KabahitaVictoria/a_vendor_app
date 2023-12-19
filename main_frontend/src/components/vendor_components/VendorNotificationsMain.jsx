@@ -26,7 +26,7 @@ const VendorNotificationsMain = () => {
         setNotifications(notifData.notifications);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [businessId]);
 
   return (
     <div className="">
@@ -44,18 +44,29 @@ const VendorNotificationsMain = () => {
             alignItems="center"
             margin=".5rem"
           >
-            <Box>
+            <Box display="flex" flexDirection="column" alignItems="center">
               User Name:{" "}
               <b>
-                {notif.for.first_name} {notif.for.last_name}
+                {notif.user.first_name} {notif.user.last_name}
               </b>
             </Box>
-            <Box>
-              Contact: <b>{notif.for.contact}</b>
+            <Box marginBottom=".75rem"></Box>
+
+            <Box display="flex" flexDirection="column" alignItems="center">
+              Contact: <b>{notif.user.contact}</b>
             </Box>
-            <Box>
-              Email: <b>{notif.for.email}</b>
+            <Box marginBottom=".75rem"></Box>
+
+            <Box display="flex" flexDirection="column" alignItems="center">
+              Email: <b>{notif.user.email}</b>
             </Box>
+            <Box marginBottom=".75rem"></Box>
+
+            <Box display="flex" flexDirection="column" alignItems="center">
+              Product: <b>{notif.product.name}</b>
+            </Box>
+            <Box marginBottom=".75rem"></Box>
+            
             <p>{notif.description}</p>
           </Box>
         );
