@@ -82,7 +82,7 @@ const ProductCard = (props) => {
             </Box>
           </>
         ) : (
-          <button onClick={handleOrderButtonClick}>Order</button>
+          <button onClick={handleOrderButtonClick} className="order-btn">Order</button>
         )}
 
         {/* Delete Confirmation Dialog */}

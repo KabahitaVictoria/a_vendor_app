@@ -4,13 +4,13 @@ from backend.locations.model import Location
 from backend.users.model import User
 from backend.analytics.model import Analysis
 from backend.businesses.model import Business
-from backend.carts.model import Cart
 from backend.categories.model import Category
 from backend.notifications.model import Notification
 from backend.orders.model import Order
 from backend.products.model import Product
 from backend.reviews.model import Review
 from backend.business_categories.model import BusinessCategory
+from backend.carts.model import Cart
 from backend.settings.model import Setting
 from flask_jwt_extended import JWTManager
 

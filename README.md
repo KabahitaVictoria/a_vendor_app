@@ -4,6 +4,7 @@
 - Vendor can create, update and delete products.
 - Vendor can see notifications from users after they order
 - User can order and notification sends to vendor
+- User can view orders on cart page, update and delete orders; all this will be reflected on vendor notification page
 
 ## ---TODO---
 - Connect sidebar to the various businesses

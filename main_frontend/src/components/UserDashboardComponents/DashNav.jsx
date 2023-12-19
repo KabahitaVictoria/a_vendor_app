@@ -5,8 +5,9 @@ const DashNav = () => {
   const navigate = useNavigate();
 
   // Extract id parameter from URL
-  const { id } = useParams();
-  
+  const { businessId, id, customerId } = useParams();
+  const userType = JSON.parse(localStorage.getItem("user_type"));
+
   // Remove access token from local storage
   const removeToken = () => {
     localStorage.removeItem("access_token");
@@ -21,8 +22,17 @@ const DashNav = () => {
   };
 
   const onHeadingClick = () => {
-    const userType = localStorage.getItem("user_type");
-    navigate(`/dashboard/${userType}/${id}`);
+    if (userType === "customer" && customerId) {
+      navigate(`/dashboard/customer/${customerId}`);
+    } else if (userType === "vendor") {
+      navigate(
+        businessId
+          ? `/dashboard/business_profile/${businessId}/vendor/${id}`
+          : "/"
+      );
+    } else {
+      navigate("/");
+    }
   };
 
   function logMeOut() {

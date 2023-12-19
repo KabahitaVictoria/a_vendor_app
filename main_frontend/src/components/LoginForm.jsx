@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { SignUpForm } from "./LandingPageComponents/SignUpForm";
-import SellerSignInForm from "./LandingPageComponents/SellerSignInForm";
-import { TextField, Button, Link, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Link,
+  Box,
+  IconButton,
+  InputAdornment,
+  CircularProgress,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function LoginForm({ closeForm, handleLogin }) {
   // console.log(props);
@@ -16,10 +23,20 @@ function LoginForm({ closeForm, handleLogin }) {
   const [showSignUpForm, setShowSignUpForm] = useState(false);
   const [showSellerLoginForm, setShowSellerLoginForm] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const navigate = useNavigate();
 
     useEffect(() => {
       if (hasSubmitted) {
+        setIsLoading(true);
+
         let isValid = true;
 
         if (!contact) {
@@ -62,6 +79,7 @@ function LoginForm({ closeForm, handleLogin }) {
         // Check if there is a message or error in the response data
         if (data.message) {
           setData(data.message);
+          console.log(data);
           if (data.access_token) {
             localStorage.setItem(
               "access_token",
@@ -71,8 +89,11 @@ function LoginForm({ closeForm, handleLogin }) {
               "first_name",
               JSON.stringify(data.for.first_name)
             );
+            localStorage.setItem("user_type", JSON.stringify(data.user_type));
+            localStorage.setItem("user_id", JSON.stringify(data.for.id));
             navigate(`/dashboard/customer/${data.for.id}`);
-            window.location.reload();
+            // window.location.reload();
+            setIsLoading(false);
           }
         } else if (data.contact_error) {
           setContactError(data.contact_error);
@@ -95,6 +116,8 @@ function LoginForm({ closeForm, handleLogin }) {
     setShowSellerLoginForm(!showSellerLoginForm);
   };
 
+  
+
   return (
     <Box
       width="30%"
@@ -106,6 +129,8 @@ function LoginForm({ closeForm, handleLogin }) {
       justifyContent="center"
       height="100vh"
     >
+      {isLoading && <CircularProgress style={{ margin: "1rem" }} />}
+
       <h1>
         <span>Customer Login</span>
       </h1>
@@ -135,7 +160,7 @@ function LoginForm({ closeForm, handleLogin }) {
       <Box paddingBottom=".5rem"></Box>
 
       <TextField
-        type="password"
+        type={showPassword ? "text" : "password"}
         label="Enter Password"
         name="psw"
         required
@@ -144,6 +169,15 @@ function LoginForm({ closeForm, handleLogin }) {
         onChange={(e) => {
           setPassword(e.target.value);
           setPasswordError("");
+        }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={handleClickShowPassword}>
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          ),
         }}
       />
       <p className="error">{passwordError}</p>

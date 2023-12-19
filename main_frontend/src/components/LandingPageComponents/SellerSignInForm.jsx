@@ -1,6 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { TextField, Button, Link, Box } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Link,
+  Box,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 function SellerSignInForm(props) {
   const [contact, setContact] = useState("");
@@ -9,6 +17,11 @@ function SellerSignInForm(props) {
   const [data, setData] = useState("");
   const [contactError, setContactError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -67,6 +80,7 @@ function SellerSignInForm(props) {
               JSON.stringify(data.for.first_name)
             );
             localStorage.setItem("user_type", JSON.stringify(data.user_type));
+            localStorage.setItem("user_id", JSON.stringify(data.id));
             navigate(`/dashboard/vendor/${data.for.id}`);
             window.location.reload();
           }
@@ -121,15 +135,24 @@ function SellerSignInForm(props) {
       <Box paddingBottom=".5rem"></Box>
 
       <TextField
-        fullWidth
-        type="password"
+        type={showPassword ? "text" : "password"}
         label="Enter Password"
         name="psw"
         required
+        fullWidth
         value={password}
         onChange={(e) => {
           setPassword(e.target.value);
           setPasswordError("");
+        }}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={handleClickShowPassword}>
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          ),
         }}
       />
       <p className="error">{passwordError}</p>

@@ -14,7 +14,7 @@ const SinglePdtMain = (props) => {
     e.preventDefault();
 
     const data = {
-      user_id: props.id,
+      user_id: props.customerId,
       product_id: props.productId,
       quantity: orderQuantity,
     };

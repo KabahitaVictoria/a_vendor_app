@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const TopBizCard = (props) => {
     const navigate = useNavigate();
@@ -22,9 +23,9 @@ const TopBizCard = (props) => {
       <div className="top-biz-card" id="business-card">
         <img src="/video/thumbnail.jpg" alt="" />
         <p className="name">{props.name}</p>
-        <button onClick={onBusinessButtonClick}>
+        <Button onClick={onBusinessButtonClick}>
           See Business
-        </button>
+        </Button>
       </div>
     );
 }

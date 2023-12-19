@@ -1,4 +1,4 @@
-.categories-card a {
+.categories-card > div {
     display: flex;
     align-items: center;
     width: 90%;
@@ -7,7 +7,7 @@
     text-decoration: none;
 }
 
-.categories-card a:hover {
+.categories-card > div:hover {
     color: #5672F9;
     transition: .3s;
     border-bottom: 1px solid #5672F9;
