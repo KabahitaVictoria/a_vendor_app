@@ -43,7 +43,7 @@ def new_business(id):
         logo = data.get('logo')
         description = data.get('description')
         video_url = data.get('videoUrl')
-        business_category_id = data.get('business_category_id')
+        # business_category_id = data.get('business_category_id')
 
         current_user = User.query.get(id).id
 
@@ -61,7 +61,7 @@ def new_business(id):
             return jsonify({'error': "Phone is required"})
 
     #storing the new reviews data
-        new_business = Business(bus_name=bus_name,user_id=current_user, email_addr=email_addr,phone=phone,description=description,logo=logo,video_url=video_url, business_category_id=business_category_id)
+        new_business = Business(bus_name=bus_name,user_id=current_user, email_addr=email_addr,phone=phone,description=description,logo=logo,video_url=video_url)
 
         #add the new review
         db.session.add(new_business)

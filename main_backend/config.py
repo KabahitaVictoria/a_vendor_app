@@ -17,12 +17,12 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     JWT_SECRET_KEY = os.getenv("SECRET_KEY")
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:''@localhost/test'
 
 class TestingConfig(Config):
     DEBUG = True
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'C:/sqlite/test.db'
+    SQLALCHEMY_DATABASE_URI = os.environ.get("TEST_DATABASE_URI")
 
 # configuration object
 config = {

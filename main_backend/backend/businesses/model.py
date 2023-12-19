@@ -21,7 +21,7 @@ class Business(db.Model):
    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
    # locations_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
-   business_category_id = db.Column(db.Integer, db.ForeignKey('business_categories.id'), nullable=False)
+   # business_category_id = db.Column(db.Integer, db.ForeignKey('business_categories.id'), nullable=False)
    
    #relationships
    products = db.relationship('Product', backref='business')
@@ -35,7 +35,7 @@ class BusinessSchema(ma.SQLAlchemyAutoSchema):
    
    user_id = ma.auto_field()
 
-   def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        BusinessCategorySchema = importlib.import_module('backend.business_categories.model').BusinessCategorySchema
-        self.fields['business_category'] = ma.Nested(BusinessCategorySchema, many=False)
+   # def __init__(self, *args, **kwargs):
+   #      super().__init__(*args, **kwargs)
+      #   BusinessCategorySchema = importlib.import_module('backend.business_categories.model').BusinessCategorySchema
+      #   self.fields['business_category'] = ma.Nested(BusinessCategorySchema, many=False)

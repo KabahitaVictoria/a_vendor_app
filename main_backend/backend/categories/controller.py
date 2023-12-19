@@ -49,6 +49,8 @@ def new_category(id):
     return jsonify({'success':True, 'message':'New category stored!', 'data': CategorySchema().dump(new_category)}), 201
 
 
+
+
 #reading
 @all_categories.route('/category/<int:id>', methods = ['GET'])
 def get_category(id):
